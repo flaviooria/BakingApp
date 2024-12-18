@@ -1,23 +1,4 @@
-version: '3.8'
-
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mysql
-      - smtp
-    environment:
-      MAIL_SERVER: smtp
-      MAIL_PORT: 1025
-      SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:root@mysql:3306/bankingapp
-    networks:
-      - finservice_network
-    restart: always
-
   mysql:
     image: mysql:8.0
     environment:
@@ -39,6 +20,25 @@ services:
     networks:
       - finservice_network
     restart: always
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - smtp
+    volumes:
+      - ./:/app/
+    environment:
+      MAIL_SERVER: smtp
+      MAIL_PORT: 1025
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:root@mysql:3306/bankingapp
+    networks:
+      - finservice_network
+    restart: on-failure
 
 
 networks:

@@ -4,7 +4,9 @@ services:
     environment:
       MYSQL_DATABASE: bankingapp             
       MYSQL_PASSWORD: root                   
-      MYSQL_ROOT_PASSWORD: root              
+      MYSQL_ROOT_PASSWORD: root    
+    volumes:
+      - caixa_bank_bankingapp:/var/lib/mysql
     ports:
       - "3306:3306"                          
     networks:
@@ -36,6 +38,7 @@ services:
       MAIL_SERVER: smtp
       MAIL_PORT: 1025
       SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:root@mysql:3306/bankingapp
+      PYTHONPATH: .
     networks:
       - finservice_network
     restart: on-failure
@@ -44,3 +47,7 @@ services:
 networks:
   finservice_network:
     driver: bridge
+
+volumes:
+  caixa_bank_bankingapp:
+  

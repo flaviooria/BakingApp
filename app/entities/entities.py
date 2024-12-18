@@ -1,5 +1,7 @@
-from database import Base
 from sqlalchemy import Column, Integer, String
+
+from common.config.database import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -8,7 +10,6 @@ class User(Base):
     name = Column(String(255))
     email = Column(String(255), unique=True)
     password = Column(String(255))
-
 
     def __init__(self, *, name: str, email: str):
         self.name = name

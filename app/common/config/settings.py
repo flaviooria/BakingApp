@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class Config:
+
+class Settings:
     @classmethod
     def get_uri_db(cls):
         return os.getenv("SQLALCHEMY_DATABASE_URI")

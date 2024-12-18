@@ -3,16 +3,16 @@ from datetime import datetime, timezone, timedelta
 
 from sqlalchemy import select
 
+from common.config.database import db_session
 from common.functions import Either, Left, Right
-from database import db_session
+from entities.entities import User
 from exceptions import ApiException
-from models import User
 from utils.jwt_util import JwtUtil
 from utils.passwords_utils import CryptPassword
 from utils.utils import validate_email
 
 
-class UserDatabaseInterface(ABC):
+class AuthDatabase(ABC):
 
     @abstractmethod
     def sign_up(self, name: str, email: str, password: str) -> Either[ApiException, User]:
@@ -23,7 +23,7 @@ class UserDatabaseInterface(ABC):
         pass
 
 
-class UserDatabaseImpl(UserDatabaseInterface):
+class AuthDatabaseImpl(AuthDatabase):
     def sign_in(self, email: str, password: str) -> Either[ApiException, str]:
         try:
             if (email == "" or email is None) or (password == "" or password is None):

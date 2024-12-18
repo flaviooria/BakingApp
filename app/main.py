@@ -1,8 +1,7 @@
 from flask import Flask
 
-import models  # noqa: F401
-from app.routes.api.v1 import api_v1
-from database import init_db, db_session
+from common.config.database import init_db, db_session
+from routes.v1 import api_v1
 
 app = Flask(__name__)
 app.register_blueprint(api_v1)

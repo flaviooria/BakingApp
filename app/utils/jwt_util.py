@@ -2,11 +2,11 @@ from typing import ClassVar
 
 from jwt import encode as JwtEncode, decode as JwtDecode
 
-from config import Config
+from common.config.settings import Settings
 
 
 class JwtUtil:
-    _secret: ClassVar[str] = Config.secret_key()
+    _secret: ClassVar[str] = Settings.secret_key()
 
     @staticmethod
     def encode(payload: dict):

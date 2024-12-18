@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from common.functions import Either
+from entities.entities import User
 from exceptions import ApiException
-from models import User
 
 
-class UserInterface(ABC):
+class AuthRepository(ABC):
 
     @abstractmethod
     def sign_up(self, name: str, email: str, password: str) -> Either[ApiException, User]:

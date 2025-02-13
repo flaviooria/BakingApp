@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     environment {
-        BRANCH_NAME = env.BRANCH_NAME // Obtiene la rama actual
+        BRANCH_NAME = "${env.BRANCH_NAME}" // Obtiene la rama actual
     }
 
     stages {
